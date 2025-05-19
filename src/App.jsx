@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import ExpenseTable from './components/ExpenseTable.jsx'
 import CategoryInput from './components/CategoryInput.jsx'
+import ExpenseInput from './components/ExpenseInput.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,7 +12,10 @@ function App() {
   return (
     <>
       <CategoryInput />
-      <ExpenseTable />
+      <ExpenseInput />
+      <div style={{ maxWidth: '80%' }}>
+        <ExpenseTable />
+      </div>
     </>
   )
 }
