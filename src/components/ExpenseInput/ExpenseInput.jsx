@@ -1,4 +1,4 @@
-import CategorySelect from "./CategorySelect";
+import CategorySelect from "../CategorySelect/CategorySelect";
 
 function ExpenseInput() {
     return (

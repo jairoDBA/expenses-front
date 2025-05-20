@@ -1,5 +1,5 @@
 import './ExpenseTable.css'
-import CategorySelect from './CategorySelect.jsx'
+import CategorySelect from '../CategorySelect/CategorySelect.jsx'
 
 function ExpenseTable() {
 
