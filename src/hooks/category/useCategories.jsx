@@ -7,7 +7,6 @@ const [categories, setCategories] = useState([
         { id: 3, category: 'Servicios Publicos' }
     ]);
 
-    useEffect(() => {
     const fetchCategories = async () => {
         try {
             const response = await fetch('http://localhost:8080/category');
@@ -18,10 +17,10 @@ const [categories, setCategories] = useState([
         }
     };
 
-    fetchCategories();
-}, []);
 
-    return { categories };
+ 
+
+    return { categories,fetchCategories };
 }
 
 export default useGetCategories;

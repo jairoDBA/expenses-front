@@ -1,9 +1,14 @@
 import './CategorySelect.css'
 import useGetCategories from '../../hooks/category/useCategories'
+import { use, useEffect } from 'react'
 
 function CategorySelect() {
 
-const { categories } = useGetCategories()
+    const { categories, fetchCategories } = useGetCategories()
+   
+    useEffect(() => {
+        fetchCategories
+    }, []);
 
     return (
         <>
