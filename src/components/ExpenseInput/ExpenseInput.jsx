@@ -3,47 +3,47 @@ import CategorySelect from "../CategorySelect/CategorySelect";
 function ExpenseInput() {
     return (
         <>
-            <div class="row g-2">
-                <div class="col-md">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInputGrid"></input>
-                        <label for="floatingInputGrid">Fecha</label>
+            <div className="row g-2">
+                <div className="col-12">
+                    <div className="form-floating">
+                        <input type="text" className="form-control" id="floatingInputGrid"></input>
+                        <label htmlFor="floatingInputGrid">Fecha</label>
                     </div>
                 </div>
-                <div class="col-md">
-                    <div class="form-floating">
+                <div className="col-12">
+                    <div className="form-floating">
                         <CategorySelect />
-                        <label for="floatingSelectGrid">Categoria</label>
+                        <label htmlFor="floatingSelectGrid">Categoria</label>
                     </div>
                 </div>
-                <div class="col-md">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInputGrid"></input>
-                        <label for="floatingInputGrid">Monto</label>
+                <div className="col-12">
+                    <div className="form-floating">
+                        <input type="text" className="form-control" id="floatingInputGrid"></input>
+                        <label htmlFor="floatingInputGrid">Monto</label>
                     </div>
                 </div>
-                <div class="col-md">
-                    <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
+                <div className="col-12">
+                    <div className="form-floating">
+                        <select className="form-select" id="floatingSelectGrid">
                             <option value="true">Si</option>
                             <option value="false">No</option>
                         </select>
-                        <label for="floatingSelectGrid">Gasto fijo</label>
+                        <label htmlFor="floatingSelectGrid">Gasto fijo</label>
                     </div>
                 </div>
-                 <div class="col-md">
-                    <div class="form-floating">
-                        <select class="form-select" id="floatingSelectGrid">
+                 <div className="col-12">
+                    <div className="form-floating">
+                        <select className="form-select" id="floatingSelectGrid">
                             <option value="true">Si</option>
                             <option value="false">No</option>
                         </select>
-                        <label for="floatingSelectGrid">Gasto divisible</label>
+                        <label htmlFor="floatingSelectGrid">Gasto divisible</label>
                     </div>
                 </div>
-                <div class="col-md">
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInputGrid"></input>
-                        <label for="floatingInputGrid">Notas</label>
+                <div className="col-12">
+                    <div className="form-floating">
+                        <input type="text" className="form-control" id="floatingInputGrid"></input>
+                        <label htmlFor="floatingInputGrid">Notas</label>
                     </div>
                 </div>
             </div>

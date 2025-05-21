@@ -11,11 +11,23 @@ function App() {
 
   return (
     <>
-    <div className='container'>
-      <CategoryInput />
-      <ExpenseInput />
-      <ExpenseTable />
-    </div>
+      <div className='container'>
+        <div className="container text-center">
+          <div className="row align-items-start">
+            <div className="col">
+              <div className='row'>
+              <CategoryInput />
+              </div>
+              <div className='row'>
+                <ExpenseInput />
+              </div>
+              </div>
+            <div className="col">
+              <ExpenseTable />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

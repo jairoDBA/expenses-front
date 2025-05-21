@@ -1,32 +1,13 @@
-import { useEffect, useState } from 'react'
 import './CategorySelect.css'
+import useGetCategories from '../../hooks/category/useCategories'
 
 function CategorySelect() {
 
-useEffect(() => {
-    const fetchCategories = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/category');
-            const data = await response.json();
-            setCategories(data);
-        } catch (error) {
-            console.error('Error fetching categories:', error);
-        }
-    };
-
-    fetchCategories();
-}, []);
-
-const [categories, setCategories] = useState([
-        { id: 1, name: 'Restaurantes' },
-        { id: 2, name: 'Mercado' },
-        { id: 3, name: 'Servicios Publicos' }
-    ]);
+const { categories } = useGetCategories()
 
     return (
         <>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Selecciona Categoria</option>
+            <select className="form-select" aria-label="Default select example" defaultValue="Selecciona una categoria">
                 {categories.map((category) => (
                     <option key={category.id} value={category.id}>{category.category}</option>
                 ))}
