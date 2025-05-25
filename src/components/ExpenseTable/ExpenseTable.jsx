@@ -1,9 +1,9 @@
 import './ExpenseTable.css'
-import useGetExpenses from '../../hooks/expense/useExpense.jsx'
+import { useExpenseContext } from '../Context/ExpenseContext.jsx'
 
 function ExpenseTable() {
 
-  const { expenses } = useGetExpenses()
+  const {expenses}= useExpenseContext();
 
   return (
     <>
