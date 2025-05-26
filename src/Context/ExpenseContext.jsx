@@ -9,9 +9,9 @@ export const ExpenseProvider = ({ children }) => {
         { id: 2, executeExpenseDate: '2007-12-04', amount: 3000, fixedExpense: true, resource: 'NOTA', isDivisible: true, category: { id: 1, category: 'Restaurante' } }
     ]);
 
-  const fetchExpenses = async () => {
+  const fetchExpenses = async (initDate, endDate) => {
     try {
-      const response = await fetch('http://localhost:8080/expense?initDate=2025-01-01&endDate=2025-12-31')
+      const response = await fetch(`http://localhost:8080/expense?initDate=${initDate}&endDate=${endDate}`)
       const data = await response.json()
       setExpenses(data)
     } catch (error) {
