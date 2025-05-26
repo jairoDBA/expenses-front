@@ -1,4 +1,3 @@
-// src/context/ExpenseContext.jsx
 import { createContext, useContext, useState } from 'react'
 
 const ExpenseContext = createContext()

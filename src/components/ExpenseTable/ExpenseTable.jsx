@@ -1,5 +1,5 @@
 import './ExpenseTable.css'
-import { useExpenseContext } from '../Context/ExpenseContext.jsx'
+import { useExpenseContext } from '../../Context/ExpenseContext.jsx'
 
 function ExpenseTable() {
 

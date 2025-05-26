@@ -1,15 +1,16 @@
 import './CategorySelect.css'
-import useGetCategories from '../../hooks/category/useCategories'
-import { use, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useCategoryContext } from '../../Context/CategoryContext'
+
 
 function CategorySelect() {
 
-    const { categories, fetchCategories } = useGetCategories()
+    const { categories, fetchCategories } = useCategoryContext()
    
     useEffect(() => {
-        fetchCategories
+        fetchCategories()
     }, []);
-
+    
     return (
         <>
             <select className="form-select" aria-label="Default select example" defaultValue="Selecciona una categoria">

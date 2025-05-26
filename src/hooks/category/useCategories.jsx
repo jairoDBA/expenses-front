@@ -17,9 +17,6 @@ const [categories, setCategories] = useState([
         }
     };
 
-
- 
-
     return { categories,fetchCategories };
 }
 
