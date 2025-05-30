@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import ExpenseTable from './components/ExpenseTable/ExpenseTable.jsx'
 import CategoryInput from './components/CategoryInput/CategoryInput.jsx'
-import ExpenseInput from './components/ExpenseInput/ExpenseInput.jsx'
+import ExpenseRegister from './components/ExpenseRegister/ExpenseRegister.jsx'
 import ExpensesDatePicker from './components/ExpensesDatePicker/ExpensesDatePicker.jsx'
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
               <CategoryInput />
               </div>
               <div className='row'>
-                <ExpenseInput />
+                <ExpenseRegister />
               </div>
               </div>
             <div className="col">
