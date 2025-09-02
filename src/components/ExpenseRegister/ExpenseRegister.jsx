@@ -34,7 +34,7 @@ function ExpenseRegister() {
                 <Checkbox label={"Gasto divisible"} setIsChecked={setIsDivisible} />
                 <Input setValue={setNotes} label={"Notas"} />
 
-                <button type="button" onClick={() => fetchSaveExpenses(executeExpenseDate, category, amount, fixedExpense, isDivisible, notes)}>Guardar</button>
+                <button className="btn btn-outline-secondary" type="button" onClick={() => fetchSaveExpenses(executeExpenseDate, category, amount, fixedExpense, isDivisible, notes)}>Guardar</button>
             </div >
         </>
     );

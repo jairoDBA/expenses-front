@@ -4,10 +4,7 @@ const ExpenseContext = createContext()
 
 export const ExpenseProvider = ({ children }) => {
 
-  const [expenses, setExpenses] = useState([
-    { id: 1, executeExpenseDate: '2007-12-03', amount: 2500, fixedExpense: true, resource: 'NOTA', isDivisible: false, category: { id: 1, category: 'AGUA' } },
-    { id: 2, executeExpenseDate: '2007-12-04', amount: 3000, fixedExpense: true, resource: 'NOTA', isDivisible: true, category: { id: 1, category: 'Restaurante' } }
-  ]);
+  const [expenses, setExpenses] = useState([]);
 
   const fetchExpenses = async (initDate, endDate) => {
     try {
