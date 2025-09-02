@@ -1,10 +1,15 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 const ExpenseContext = createContext()
 
 export const ExpenseProvider = ({ children }) => {
 
   const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    fetchExpenses('', '')
+  }, []);
+  
 
   const fetchExpenses = async (initDate, endDate) => {
     try {
@@ -36,13 +41,16 @@ export const ExpenseProvider = ({ children }) => {
       console.log('body:', body);
 
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        console.log(`response ${JSON.stringify(response)}`)
+        throw new Error(`Error: ${response.message}`);
       }
 
       const data = await response.json();
       console.log('Expense saved successfully:', data);
+      alert('Gasto guardado exitosamente');
     } catch (error) {
       console.error('Error fetching expense save:', error);
+      alert(`No se pudo guardar el gasto ${error.message}`);
     }
   };
 
