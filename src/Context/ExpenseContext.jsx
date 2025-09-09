@@ -40,12 +40,13 @@ export const ExpenseProvider = ({ children }) => {
       });
       console.log('body:', body);
 
-      if (!response.ok) {
-        console.log(`response ${JSON.stringify(response)}`)
-        throw new Error(`Error: ${response.message}`);
+      const data = await response.json();
+
+        if (!response.ok) {
+        console.log(`response ${data.message}`)
+        throw new Error(`Error: ${data.message}`);
       }
 
-      const data = await response.json();
       console.log('Expense saved successfully:', data);
       alert('Gasto guardado exitosamente');
     } catch (error) {
