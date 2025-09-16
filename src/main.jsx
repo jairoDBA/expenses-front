@@ -5,6 +5,7 @@ import { CategoryProvider } from './Context/CategoryContext.jsx'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App.jsx'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
