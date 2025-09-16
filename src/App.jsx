@@ -1,54 +1,46 @@
 import { useState } from 'react'
 import { Navbar, Container, Button } from "react-bootstrap";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css'
-import ExpenseTable from './components/ExpenseTable/ExpenseTable.jsx'
 import CategoryInput from './components/CategoryInput/CategoryInput.jsx'
-import ExpenseRegister from './components/ExpenseRegister/ExpenseRegister.jsx'
-import ExpensesDatePicker from './components/ExpensesDatePicker/ExpensesDatePicker.jsx'
 import Sidebar from './components/sidebar/Sidebar.jsx'
+import Expenses from './components/Expenses/Expenses.jsx'
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        {/* Sidebar fijo / offcanvas */}
-        <div className="col-md-2 p-0">
-          <Sidebar show={showSidebar} handleClose={() => setShowSidebar(false)} />
-        </div>
+    <Router>
+      <div className="container-fluid">
+        <div className="row">
+          {/* Sidebar */}
+          <div className="col-md-2 p-0">
+            <Sidebar show={showSidebar} handleClose={() => setShowSidebar(false)} />
+          </div>
 
-        {/* Contenido principal */}
-        <div className="col-md-10">
-          {/* Navbar con botón para abrir sidebar en móviles */}
-          <Navbar bg="light" className="d-md-none">
-            <Container fluid>
-              <Button variant="outline-primary" onClick={() => setShowSidebar(true)}>
-                ☰ Menú
-              </Button>
-              <Navbar.Brand>Dashboard</Navbar.Brand>
-            </Container>
-          </Navbar>
+          {/* Contenido principal */}
+          <div className="col-md-10">
+            <Navbar bg="light" className="d-md-none">
+              <Container fluid>
+                <Button variant="outline-primary" onClick={() => setShowSidebar(true)}>
+                  ☰ Menú
+                </Button>
+                <Navbar.Brand>Dashboard</Navbar.Brand>
+              </Container>
+            </Navbar>
 
-          <div className="container text-center mt-3">
-            <div className="row align-items-start">
-              <div className="col">
-                <div className="row">
-                  <CategoryInput />
-                </div>
-                <div className="row">
-                  <ExpenseRegister />
-                </div>
-              </div>
-              <div className="col">
-                <ExpensesDatePicker />
-                <ExpenseTable />
-              </div>
+            {/* Aquí renderizan los componentes según la ruta */}
+            <div className="container mt-3">
+              <Routes>
+                <Route path="/" element={<h2>Bienvenido al Dashboard</h2>} />
+                <Route path="/categorias" element={<CategoryInput />} />
+                <Route path="/gastos" element={<Expenses />} />
+              </Routes>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Router>
   );
 }
 

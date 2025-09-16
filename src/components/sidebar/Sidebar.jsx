@@ -1,33 +1,41 @@
-import { useState } from "react";
 import { Offcanvas, Nav, Accordion } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function Sidebar({ show, handleClose }) {
   return (
     <>
-      {/* Sidebar fijo solo en pantallas grandes */}
-      <div className="d-none d-md-block bg-dark text-white vh-100 p-3" style={{ width: "220px" }}>
-        <h4>Gastos de mi casa</h4>
+      {/* Sidebar fijo en escritorio */}
+      <div
+        className="d-none d-md-block bg-dark text-white vh-100 p-3"
+        style={{ width: "220px" }}
+      >
+        <h4>Mi App</h4>
         <Nav className="flex-column">
-          <Nav.Link className="text-white" href="#home">Inicio</Nav.Link>
-          <Nav.Link className="text-white" href="#perfil">Perfil</Nav.Link>
+          <Nav.Link as={Link} to="/" className="text-white">
+            Inicio
+          </Nav.Link>
 
-          <Accordion defaultActiveKey="0" alwaysOpen>
+          <Accordion alwaysOpen>
+            {/* Categorias */}
             <Accordion.Item eventKey="0">
-              <Accordion.Header>Configuración</Accordion.Header>
+              <Accordion.Header>Categorias</Accordion.Header>
               <Accordion.Body>
                 <Nav className="flex-column ms-3">
-                  <Nav.Link href="#cuenta">Categorias</Nav.Link>
-                  <Nav.Link href="#seguridad">Gastos</Nav.Link>
+                  <Nav.Link as={Link} to="/categorias">
+                    Categorias
+                  </Nav.Link>
                 </Nav>
               </Accordion.Body>
             </Accordion.Item>
 
+            {/* Gastos */}
             <Accordion.Item eventKey="1">
-              <Accordion.Header>Reportes</Accordion.Header>
+              <Accordion.Header>Gastos</Accordion.Header>
               <Accordion.Body>
                 <Nav className="flex-column ms-3">
-                  <Nav.Link href="#mensual">Mensual</Nav.Link>
-                  <Nav.Link href="#anual">Anual</Nav.Link>
+                  <Nav.Link as={Link} to="/gastos">
+                    Gastos
+                  </Nav.Link>
                 </Nav>
               </Accordion.Body>
             </Accordion.Item>
@@ -35,33 +43,43 @@ export default function Sidebar({ show, handleClose }) {
         </Nav>
       </div>
 
-      {/* Sidebar en móviles como Offcanvas */}
-      <Offcanvas show={show} onHide={handleClose} responsive="md" className="bg-dark text-white">
+      {/* Sidebar móvil con Offcanvas */}
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        responsive="md"
+        className="bg-dark text-white"
+      >
         <Offcanvas.Header closeButton closeVariant="white">
           <Offcanvas.Title>Mi App</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="flex-column">
-            <Nav.Link className="text-white" href="#home">Inicio</Nav.Link>
-            <Nav.Link className="text-white" href="#perfil">Perfil</Nav.Link>
+            <Nav.Link as={Link} to="/" className="text-white">
+              Inicio
+            </Nav.Link>
 
-            <Accordion defaultActiveKey="0" alwaysOpen>
+            <Accordion alwaysOpen>
+              {/* Categorias */}
               <Accordion.Item eventKey="0">
-                <Accordion.Header>Configuración</Accordion.Header>
+                <Accordion.Header>Categorias</Accordion.Header>
                 <Accordion.Body>
                   <Nav className="flex-column ms-3">
-                    <Nav.Link href="#cuenta">Cuenta</Nav.Link>
-                    <Nav.Link href="#seguridad">Seguridad</Nav.Link>
+                    <Nav.Link as={Link} to="/categorias">
+                      Categorias
+                    </Nav.Link>
                   </Nav>
                 </Accordion.Body>
               </Accordion.Item>
 
+              {/* Gastos */}
               <Accordion.Item eventKey="1">
-                <Accordion.Header>Reportes</Accordion.Header>
+                <Accordion.Header>Gastos</Accordion.Header>
                 <Accordion.Body>
                   <Nav className="flex-column ms-3">
-                    <Nav.Link href="#mensual">Mensual</Nav.Link>
-                    <Nav.Link href="#anual">Anual</Nav.Link>
+                    <Nav.Link as={Link} to="/gastos">
+                      Gastos
+                    </Nav.Link>
                   </Nav>
                 </Accordion.Body>
               </Accordion.Item>
@@ -72,3 +90,4 @@ export default function Sidebar({ show, handleClose }) {
     </>
   );
 }
+

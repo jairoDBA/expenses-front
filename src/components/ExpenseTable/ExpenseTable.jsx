@@ -1,5 +1,6 @@
 import './ExpenseTable.css'
 import { useExpenseContext } from '../../Context/ExpenseContext.jsx'
+import ExpenseRegister from '../ExpenseRegister/ExpenseRegister.jsx';
 
 function ExpenseTable() {
 
@@ -32,6 +33,8 @@ function ExpenseTable() {
                 <td value={expense.id}>{expense.resource}</td>
               </tr>
             ))}
+
+            <ExpenseRegister asRow />
           </tbody>
         </table>
       </div>

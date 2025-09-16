@@ -5,85 +5,70 @@ import Checkbox from "../Checkbox/Checkbox";
 import { useExpenseContext } from "../../Context/ExpenseContext";
 import { useState } from "react";
 
-function ExpenseRegister() {
+export default function ExpenseRegister() {
+  const { fetchSaveExpenses } = useExpenseContext();
 
-    const { fetchSaveExpenses } = useExpenseContext();
+  const [executeExpenseDate, setExecuteExpenseDate] = useState("");
+  const [category, setCategory] = useState({});
+  const [amount, setAmount] = useState(0);
+  const [fixedExpense, setFixedExpense] = useState(false);
+  const [isDivisible, setIsDivisible] = useState(false);
+  const [notes, setNotes] = useState("");
+  const [errors, setErrors] = useState({});
 
-    const [executeExpenseDate, setExecuteExpenseDate] = useState('');
-    const [category, setCategory] = useState({});
-    const [amount, setAmount] = useState(0);
-    const [fixedExpense, setFixedExpense] = useState(false);
-    const [isDivisible, setIsDivisible] = useState(false);
-    const [notes, setNotes] = useState('');
-    const [errors, setErrors] = useState({});
+  const handleSave = () => {
+    const newErrors = {};
 
-    console.log('executeExpenseDate: ' + executeExpenseDate);
-    console.log("category: " + category);
-    console.log("amount: " + amount);
-    console.log("fixedExpense: " + fixedExpense);
-    console.log("isDivisible: " + isDivisible);
-    console.log("notes: " + notes);
+    if (!executeExpenseDate) newErrors.date = "La fecha del gasto es obligatoria.";
+    if (!category.id) newErrors.category = "Debe seleccionar una categoría válida.";
+    if (!amount || isNaN(amount) || parseFloat(amount) <= 0)
+      newErrors.amount = "Debe ingresar un monto válido mayor a 0.";
 
-    const handleSave = () => {
-        const newErrors = {};
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
-        // Validación: Fecha
-        if (!executeExpenseDate) {
-            newErrors.date = "La fecha del gasto es obligatoria.";
-        }
-
-        // Validación: Categoría
-        if (!category.id) {
-            newErrors.category = "Debe seleccionar una categoría válida.";
-        }
-
-        // Validación: Monto
-        if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
-            newErrors.amount = "Debe ingresar un monto válido mayor a 0.";
-        }
-
-        // Si hay errores, se setean y no se envía
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            return;
-        }
-
-        // Limpiar errores
-        setErrors({});
-
-        // Ejecutar el guardado
-        fetchSaveExpenses(
-            executeExpenseDate,
-            category,
-            parseFloat(amount),
-            fixedExpense,
-            isDivisible,
-            notes.trim()
-        );
-    };
-
-    return (
-        <>
-            <div className="row g-2">
-                <Input label={"Fecha del gasto"}>
-                <DatePickerCustom onChangeDate={setExecuteExpenseDate} />
-                 {errors.date && <small className="text-danger">{errors.date}</small>}
-                </Input>
-                <Input label={"Categoria"}>
-                <CategorySelect onChangeCategory={setCategory} />
-                {errors.category && <small className="text-danger">{errors.category}</small>}
-                </Input>
-                <Input setValue={setAmount} label={"Monto"} />
-                {errors.amount && <small className="text-danger ms-3">{errors.amount}</small>}
-
-                <Checkbox label={"Gasto fijo"} setIsChecked={setFixedExpense} />
-                <Checkbox label={"Gasto divisible"} setIsChecked={setIsDivisible} />
-                <Input setValue={setNotes} label={"Notas"} />
-
-                <button className="btn btn-outline-secondary" type="button" onClick={handleSave}>Guardar</button>
-            </div >
-        </>
+    setErrors({});
+    fetchSaveExpenses(
+      executeExpenseDate,
+      category,
+      parseFloat(amount),
+      fixedExpense,
+      isDivisible,
+      notes.trim()
     );
-}
+  };
 
-export default ExpenseRegister;
+  return (
+    <tr>
+      <td>—</td>
+      <td>
+        <DatePickerCustom onChangeDate={setExecuteExpenseDate} />
+        {errors.date && <small className="text-danger d-block">{errors.date}</small>}
+      </td>
+      <td>
+        <CategorySelect onChangeCategory={setCategory} />
+        {errors.category && <small className="text-danger d-block">{errors.category}</small>}
+      </td>
+      <td>
+        <Input setValue={setAmount} />
+        {errors.amount && <small className="text-danger d-block">{errors.amount}</small>}
+      </td>
+      <td>
+        <Checkbox label={"Fijo"} setIsChecked={setFixedExpense} />
+      </td>
+      <td>
+        <Checkbox label={"Divisible"} setIsChecked={setIsDivisible} />
+      </td>
+      <td>
+        <Input setValue={setNotes} />
+      </td>
+      <td>
+        <button className="btn btn-sm btn-outline-secondary" type="button" onClick={handleSave}>
+          Guardar
+        </button>
+      </td>
+    </tr>
+  );
+}
