@@ -19,13 +19,13 @@ function App() {
           </div>
 
           {/* Contenido principal */}
-          <div className="col-md-10">
+          <div className="col-md-10"> 
+            {/* Top Navbar for mobile to open sidebar */}
             <Navbar bg="light" className="d-md-none">
               <Container fluid>
                 <Button variant="outline-primary" onClick={() => setShowSidebar(true)}>
-                  ☰ Menú
+                  ☰ Menu
                 </Button>
-                <Navbar.Brand>Dashboard</Navbar.Brand>
               </Container>
             </Navbar>
 
