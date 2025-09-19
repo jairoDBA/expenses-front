@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 function CategoryInput() {
 
-    const { saveCategory } = useCategoryContext();
+    const { saveCategory, loading } = useCategoryContext();
 
     const [category, setCategory] = useState('');
     const [error, setError] = useState('');
@@ -47,9 +47,12 @@ function CategoryInput() {
                     placeholder="Ingresa el nombre de la Categoria" 
                     aria-label="Categoria"
                     aria-describedby="addon-wrapping" 
-                    onChange={handlerCategorychange} 
+                    onChange={handlerCategorychange}
+                    value={category}
                 />
-                <button className="btn btn-outline-secondary" type="button" onClick={handleSave}>Guardar</button>
+                <button className="btn btn-outline-secondary" type="button" onClick={handleSave} disabled={loading}>
+                    {loading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 'Guardar'}
+                </button>
             </div>
 
             {error && <div className="invalid-feedback d-block">{error}</div>}

@@ -5,6 +5,8 @@ const CategoryContext = createContext()
 export const CategoryProvider = ({ children }) => {
 
     const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [toast, setToast] = useState({ show: false, message: '', variant: 'success' });
 
     const fetchCategories = async () => {
         try {
@@ -16,34 +18,66 @@ export const CategoryProvider = ({ children }) => {
         }
     };
 
-    const saveCategory = async (category) => {
-        const body = JSON.stringify({
-            category
-        })
+    const saveCategory = async (category, id = null) => {
+        // Backend expects POST for both create and update. Include id in body when updating.
+        const payload = id ? { id, category } : { category };
+        const body = JSON.stringify(payload);
+        const url = 'http://localhost:8080/category';
+        setLoading(true);
         try {
-            const response = await fetch('http://localhost:8080/category', {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: body
+                body
             });
-            console.log('body:', body);
+            console.log(`POST ${url} body:`, body);
 
             if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
+                const data = await response.json().catch(() => ({}));
+                const message = data.message || `Error: ${response.status}`;
+                setToast({ show: true, message, variant: 'danger' });
+                throw new Error(message);
             }
 
             const data = await response.json();
-            console.log('Category saved successfully:', data);
+            console.log('Category saved/updated successfully:', data);
+            setToast({ show: true, message: data.message || 'Operación exitosa', variant: 'success' });
             fetchCategories();
         } catch (error) {
-            console.error('Error category save:', error);
+            console.error('Error saving/updating category:', error);
+            if (!toast.show) setToast({ show: true, message: error.message || 'Error inesperado', variant: 'danger' });
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const deleteCategory = async (id) => {
+        setLoading(true);
+        try {
+            const response = await fetch(`http://localhost:8080/category/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                const data = await response.json().catch(() => ({}));
+                const message = data.message || `Error deleting category: ${response.status}`;
+                setToast({ show: true, message, variant: 'danger' });
+                throw new Error(message);
+            }
+            const data = await response.json().catch(() => ({}));
+            setToast({ show: true, message: data.message || 'Eliminado correctamente', variant: 'success' });
+            fetchCategories();
+        } catch (error) {
+            console.error('Error deleting category:', error);
+            if (!toast.show) setToast({ show: true, message: error.message || 'Error al eliminar', variant: 'danger' });
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <CategoryContext.Provider value={{ categories, fetchCategories, saveCategory }}>
+        <CategoryContext.Provider value={{ categories, fetchCategories, saveCategory, deleteCategory, loading, toast, setToast }}>
             {children}
         </CategoryContext.Provider>
     )

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Navbar, Container, Button } from "react-bootstrap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css'
-import CategoryInput from './components/CategoryInput/CategoryInput.jsx'
+import Category from './components/Category/Category.jsx';
 import Sidebar from './components/sidebar/Sidebar.jsx'
 import Expenses from './components/Expenses/Expenses.jsx'
 
@@ -33,7 +33,7 @@ function App() {
             <div className="container mt-3">
               <Routes>
                 <Route path="/" element={<h2>Bienvenido al Dashboard</h2>} />
-                <Route path="/categorias" element={<CategoryInput />} />
+                <Route path="/categorias" element={<Category />} />
                 <Route path="/gastos" element={<Expenses />} />
               </Routes>
             </div>
