@@ -61,7 +61,14 @@ export const CategoryProvider = ({ children }) => {
             });
             if (!response.ok) {
                 const data = await response.json().catch(() => ({}));
-                const message = data.message || `Error deleting category: ${response.status}`;
+                const backendMessage = (data && data.message) ? String(data.message).toLowerCase() : '';
+                // Friendly message when deletion is blocked because category is in use
+                let message;
+                if (response.status === 409 || /constraint|referenc|in use|foreign key|associated|cannot delete/i.test(backendMessage)) {
+                    message = 'No se puede eliminar la categoría porque está asociada a uno o más gastos.';
+                } else {
+                    message = data.message || `Error al eliminar la categoría: ${response.status}`;
+                }
                 setToast({ show: true, message, variant: 'danger' });
                 throw new Error(message);
             }
