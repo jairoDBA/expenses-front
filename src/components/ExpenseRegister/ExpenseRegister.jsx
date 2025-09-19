@@ -56,10 +56,10 @@ export default function ExpenseRegister() {
         {errors.amount && <small className="text-danger d-block">{errors.amount}</small>}
       </td>
       <td>
-        <Checkbox label={"Fijo"} setIsChecked={setFixedExpense} />
+        <Checkbox setIsChecked={setFixedExpense} />
       </td>
       <td>
-        <Checkbox label={"Divisible"} setIsChecked={setIsDivisible} />
+        <Checkbox setIsChecked={setIsDivisible} />
       </td>
       <td>
         <Input setValue={setNotes} />

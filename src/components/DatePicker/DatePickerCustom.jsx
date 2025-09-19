@@ -24,7 +24,7 @@ function DatePickerCustom({ onChangeDate, showLabel = true, id }) {
                 max={today}
                 onChange={handlerOnChangedate}
             />
-            {showLabel && <label htmlFor={id} className="small text-muted">Fecha de gasto {date}</label>}
+            {showLabel && <label htmlFor={id} className="small text-muted"> {date}</label>}
         </div>
     );
 }
