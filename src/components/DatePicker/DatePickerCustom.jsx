@@ -1,24 +1,31 @@
 import { useState } from 'react';
 
-function DatePickerCustom({ onChangeDate }) {
+function DatePickerCustom({ onChangeDate, showLabel = true, id }) {
 
-const [date, setDate] = useState('');
+    const [date, setDate] = useState('');
 
-// Obtener fecha actual en formato YYYY-MM-DD usando zona horaria de Colombia
-const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Bogota' });
+    // Obtener fecha actual en formato YYYY-MM-DD usando zona horaria de Colombia
+    const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Bogota' });
 
-const handlerOnChangedate = (event) => {
-    const dateSelet = event.target.value 
-    console.log('date ' + dateSelet);
-    setDate(dateSelet);
-    onChangeDate(dateSelet);
-}
+    const handlerOnChangedate = (event) => {
+        const dateSelet = event.target.value;
+        console.log('date ' + dateSelet);
+        setDate(dateSelet);
+        onChangeDate(dateSelet);
+    }
 
     return (
-        <div>
-            <input type="date" id="dateExpense" name="dateExpense" max={today} onChange={handlerOnChangedate}></input>
-            <label htmlFor="dateExpense">Fecha de gasto {date}</label>
-        </ div>
+        <div className="d-flex flex-column">
+            <input
+                type="date"
+                id={id}
+                name={id}
+                className="form-control"
+                max={today}
+                onChange={handlerOnChangedate}
+            />
+            {showLabel && <label htmlFor={id} className="small text-muted">Fecha de gasto {date}</label>}
+        </div>
     );
 }
 
